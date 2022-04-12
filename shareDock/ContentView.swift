@@ -9,8 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Label("홈", systemImage: "house")
+                    }
+                    .navigationTitle("홈")
+                
+                CreateView()
+                    .tabItem {
+                        Label("파티생성", systemImage: "person.badge.plus")
+                    }
+                    .navigationTitle("파티 생성")
+            }
+        }
+        
     }
 }
 
