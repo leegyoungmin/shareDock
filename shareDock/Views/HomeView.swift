@@ -10,10 +10,12 @@ import SwiftUI
 
 struct HomeView:View{
     var body: some View{
-        NavigationLink {
-            Text("123")
-        } label: {
-            Text("Home")
+        VStack{
+            NavigationLink {
+                Text("123")
+            } label: {
+                Text("Home")
+            }
         }
     }
 }

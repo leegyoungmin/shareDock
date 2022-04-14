@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18610D4028081AEB00A00657 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610D3F28081AEB00A00657 /* SignInViewModel.swift */; };
+		18610D4228084E7200A00657 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610D4128084E7200A00657 /* FriendsView.swift */; };
+		18610D47280851E700A00657 /* FriendVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610D46280851E700A00657 /* FriendVIewModel.swift */; };
+		18610D4928085DFB00A00657 /* FriendAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610D4828085DFB00A00657 /* FriendAddView.swift */; };
 		18C1B29428057FBD0058B577 /* shareDockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B29328057FBD0058B577 /* shareDockApp.swift */; };
 		18C1B29628057FBD0058B577 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B29528057FBD0058B577 /* ContentView.swift */; };
 		18C1B29828057FBE0058B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18C1B29728057FBE0058B577 /* Assets.xcassets */; };
@@ -21,12 +25,20 @@
 		18C1B2B42805B5870058B577 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 18C1B2B32805B5870058B577 /* FirebaseDatabase */; };
 		18C1B2B62805B5870058B577 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 18C1B2B52805B5870058B577 /* FirebaseFirestore */; };
 		18C1B2B82805B5870058B577 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 18C1B2B72805B5870058B577 /* FirebaseFirestoreSwift-Beta */; };
-		18C1B2BB2805B78F0058B577 /* SignUpViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2BA2805B78F0058B577 /* SignUpViews.swift */; };
+		18C1B2BB2805B78F0058B577 /* UserPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2BA2805B78F0058B577 /* UserPhoneView.swift */; };
 		18C1B2BE2805B9C80058B577 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2BD2805B9C80058B577 /* Extensions.swift */; };
 		18C1B2C12805BEB60058B577 /* User+SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2C02805BEB60058B577 /* User+SignUpViewModel.swift */; };
+		18EBF0E32806C02000921803 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 18EBF0E22806C02000921803 /* iPhoneNumberField */; };
+		18EBF0E52806D1BE00921803 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF0E42806D1BE00921803 /* UserNameView.swift */; };
+		18EBF0E72806D40A00921803 /* UserEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF0E62806D40A00921803 /* UserEmailView.swift */; };
+		18EBF0E92807F95E00921803 /* UserPassWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF0E82807F95E00921803 /* UserPassWordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18610D3F28081AEB00A00657 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		18610D4128084E7200A00657 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		18610D46280851E700A00657 /* FriendVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendVIewModel.swift; sourceTree = "<group>"; };
+		18610D4828085DFB00A00657 /* FriendAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddView.swift; sourceTree = "<group>"; };
 		18C1B29028057FBD0058B577 /* shareDock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shareDock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C1B29328057FBD0058B577 /* shareDockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shareDockApp.swift; sourceTree = "<group>"; };
 		18C1B29528057FBD0058B577 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,9 +48,12 @@
 		18C1B2A4280582F00058B577 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		18C1B2A62805B3F40058B577 /* LoginViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViews.swift; sourceTree = "<group>"; };
 		18C1B2A82805B4740058B577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		18C1B2BA2805B78F0058B577 /* SignUpViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViews.swift; sourceTree = "<group>"; };
+		18C1B2BA2805B78F0058B577 /* UserPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhoneView.swift; sourceTree = "<group>"; };
 		18C1B2BD2805B9C80058B577 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		18C1B2C02805BEB60058B577 /* User+SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SignUpViewModel.swift"; sourceTree = "<group>"; };
+		18EBF0E42806D1BE00921803 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
+		18EBF0E62806D40A00921803 /* UserEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEmailView.swift; sourceTree = "<group>"; };
+		18EBF0E82807F95E00921803 /* UserPassWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPassWordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C1B2AE2805B5870058B577 /* FirebaseAnalytics in Frameworks */,
+				18EBF0E32806C02000921803 /* iPhoneNumberField in Frameworks */,
 				18C1B2B22805B5870058B577 /* FirebaseAuth in Frameworks */,
 				18C1B2B42805B5870058B577 /* FirebaseDatabase in Frameworks */,
 				18C1B2B82805B5870058B577 /* FirebaseFirestoreSwift-Beta in Frameworks */,
@@ -58,6 +74,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18610D3E28081ADC00A00657 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				18C1B2A62805B3F40058B577 /* LoginViews.swift */,
+				18610D3F28081AEB00A00657 /* SignInViewModel.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		18610D45280851D900A00657 /* FriendViews */ = {
+			isa = PBXGroup;
+			children = (
+				18610D4128084E7200A00657 /* FriendsView.swift */,
+				18610D46280851E700A00657 /* FriendVIewModel.swift */,
+				18610D4828085DFB00A00657 /* FriendAddView.swift */,
+			);
+			path = FriendViews;
+			sourceTree = "<group>";
+		};
 		18C1B28728057FBD0058B577 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +134,7 @@
 		18C1B2A3280582910058B577 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				18610D45280851D900A00657 /* FriendViews */,
 				18C1B2B92805B7760058B577 /* AuthViews */,
 				18C1B2A12805828D0058B577 /* CreateView.swift */,
 				18C1B2A4280582F00058B577 /* HomeView.swift */,
@@ -109,9 +145,8 @@
 		18C1B2B92805B7760058B577 /* AuthViews */ = {
 			isa = PBXGroup;
 			children = (
-				18C1B2BF2805BEA30058B577 /* Model+ViewModel */,
-				18C1B2A62805B3F40058B577 /* LoginViews.swift */,
-				18C1B2BA2805B78F0058B577 /* SignUpViews.swift */,
+				18610D3E28081ADC00A00657 /* SignIn */,
+				18EBF0E02806BE5100921803 /* SignUp */,
 			);
 			path = AuthViews;
 			sourceTree = "<group>";
@@ -124,12 +159,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		18C1B2BF2805BEA30058B577 /* Model+ViewModel */ = {
+		18EBF0E02806BE5100921803 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
 				18C1B2C02805BEB60058B577 /* User+SignUpViewModel.swift */,
+				18C1B2BA2805B78F0058B577 /* UserPhoneView.swift */,
+				18EBF0E42806D1BE00921803 /* UserNameView.swift */,
+				18EBF0E62806D40A00921803 /* UserEmailView.swift */,
+				18EBF0E82807F95E00921803 /* UserPassWordView.swift */,
 			);
-			path = "Model+ViewModel";
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +194,7 @@
 				18C1B2B32805B5870058B577 /* FirebaseDatabase */,
 				18C1B2B52805B5870058B577 /* FirebaseFirestore */,
 				18C1B2B72805B5870058B577 /* FirebaseFirestoreSwift-Beta */,
+				18EBF0E22806C02000921803 /* iPhoneNumberField */,
 			);
 			productName = shareDock;
 			productReference = 18C1B29028057FBD0058B577 /* shareDock.app */;
@@ -182,11 +222,13 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 18C1B28728057FBD0058B577;
 			packageReferences = (
 				18C1B2AB2805B4E80058B577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				18C1B2AC2805B5870058B577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				18EBF0E12806C02000921803 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 			);
 			productRefGroup = 18C1B29128057FBD0058B577 /* Products */;
 			projectDirPath = "";
@@ -215,14 +257,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18C1B2BB2805B78F0058B577 /* SignUpViews.swift in Sources */,
+				18EBF0E52806D1BE00921803 /* UserNameView.swift in Sources */,
+				18C1B2BB2805B78F0058B577 /* UserPhoneView.swift in Sources */,
+				18610D47280851E700A00657 /* FriendVIewModel.swift in Sources */,
 				18C1B2C12805BEB60058B577 /* User+SignUpViewModel.swift in Sources */,
 				18C1B29628057FBD0058B577 /* ContentView.swift in Sources */,
+				18EBF0E92807F95E00921803 /* UserPassWordView.swift in Sources */,
 				18C1B2A5280582F00058B577 /* HomeView.swift in Sources */,
 				18C1B2A22805828D0058B577 /* CreateView.swift in Sources */,
+				18EBF0E72806D40A00921803 /* UserEmailView.swift in Sources */,
+				18610D4928085DFB00A00657 /* FriendAddView.swift in Sources */,
+				18610D4028081AEB00A00657 /* SignInViewModel.swift in Sources */,
 				18C1B29428057FBD0058B577 /* shareDockApp.swift in Sources */,
 				18C1B2A72805B3F40058B577 /* LoginViews.swift in Sources */,
 				18C1B2BE2805B9C80058B577 /* Extensions.swift in Sources */,
+				18610D4228084E7200A00657 /* FriendsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +490,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		18EBF0E12806C02000921803 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -473,6 +530,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 18C1B2AB2805B4E80058B577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseFirestoreSwift-Beta";
+		};
+		18EBF0E22806C02000921803 /* iPhoneNumberField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18EBF0E12806C02000921803 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
+			productName = iPhoneNumberField;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,8 +10,7 @@ import Firebase
 import SwiftUI
 
 struct LoginView:View{
-    @State var email:String = ""
-    @State var passWord:String = ""
+    @EnvironmentObject var viewModel:SignInViewModel
     @State var isPresentSignUp:Bool = false
     var body: some View{
         VStack{
@@ -20,14 +19,14 @@ struct LoginView:View{
                 .frame(minHeight:200)
             
             
-            TextField("이메일을 입력하세요.", text: $email)
+            TextField("이메일을 입력하세요.", text: $viewModel.userEmail)
                 .textFieldStyle(.roundedBorder)
             
-            SecureField("비밀번호를 입력하세요.", text: $passWord)
+            SecureField("비밀번호를 입력하세요.", text: $viewModel.userPassWord)
                 .textFieldStyle(.roundedBorder)
             
             Button {
-                print(123)
+                self.viewModel.signIn()
             } label: {
                 HStack{
                     Spacer()
@@ -53,7 +52,7 @@ struct LoginView:View{
         }
         .padding()
         .fullScreenCover(isPresented: $isPresentSignUp) {
-            SignUpView()
+            UserPhoneView(isPresent: $isPresentSignUp)
         }
     }
 }

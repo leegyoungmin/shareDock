@@ -14,11 +14,11 @@ struct User{
 }
 
 class SignUpViewModel:ObservableObject{
+    @Published var userPhoneNumber:String = ""
     @Published var userName:String = ""
     @Published var userEmail:String = ""
     @Published var userPassWord:String = ""
     @Published var confirmPassWord:String = ""
-    
     
     func SignUp(completions:@escaping(String?)->Void){
         if userPassWord == confirmPassWord{
@@ -30,6 +30,8 @@ class SignUpViewModel:ObservableObject{
                         "name":self.userName,
                         "email":self.userEmail
                     ]
+                    
+                    print("Data ::: \(data)")
                     
                     Database.database().reference()
                         .child("User")

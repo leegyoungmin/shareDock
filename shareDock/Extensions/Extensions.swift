@@ -8,6 +8,17 @@
 import Foundation
 import SwiftUI
 
+func isValidEmail(testStr:String) -> Bool {
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailTest.evaluate(with: testStr)
+}
+
+extension UIApplication{
+    func endEdit(){
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
 
 struct roundedButtonStyle:ButtonStyle{
     let textColor:Color
@@ -25,7 +36,7 @@ struct roundedButtonStyle:ButtonStyle{
         .padding(.vertical,10)
         .background( configuration.isPressed ? .gray.opacity(0.2):color)
         .cornerRadius(10)
-
+        
     }
 }
 
@@ -48,7 +59,7 @@ struct signUpTextFieldStyle:TextFieldStyle{
                 )
         }
         
-
+        
     }
 }
 
@@ -69,6 +80,6 @@ struct extensions_previews:PreviewProvider{
         }
         .previewLayout(.sizeThatFits)
         .padding()
-
+        
     }
 }
