@@ -21,9 +21,6 @@ struct ContentView: View {
         else if selection == 1{
             title = "친구목록"
         }
-        else if selection == 2{
-            title = "파티생성"
-        }
         return title
     }
     
@@ -43,13 +40,6 @@ struct ContentView: View {
                         .tabItem {
                             Label("친구 목록", systemImage: "person.2")
                         }
-                    
-                    CreateView()
-                        .tag(2)
-                        .tabItem {
-                            Label("파티생성", systemImage: "person.badge.plus")
-                        }
-                    
 
                 }
                 .navigationTitle(convertTitle())
@@ -85,10 +75,6 @@ struct ContentView: View {
                             Image(systemName: "ellipsis")
                                 .rotationEffect(Angle(degrees: 90))
                         }
-
-                        
-                        
-
                     }
                 }
             }

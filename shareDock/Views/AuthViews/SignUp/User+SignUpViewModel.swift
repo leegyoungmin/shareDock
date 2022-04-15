@@ -11,6 +11,7 @@ import Firebase
 struct User{
     let userName:String
     let userEmail:String
+    let userPhone:String
 }
 
 class SignUpViewModel:ObservableObject{
@@ -28,7 +29,8 @@ class SignUpViewModel:ObservableObject{
                 if error == nil{
                     let data:[String:Any] = [
                         "name":self.userName,
-                        "email":self.userEmail
+                        "email":self.userEmail,
+                        "phone":self.userPhoneNumber
                     ]
                     
                     print("Data ::: \(data)")

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1822E3A72809487D00D13740 /* Model + FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1822E3A62809487D00D13740 /* Model + FriendAddViewModel.swift */; };
+		1822E3AA28095CFC00D13740 /* PartyCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1822E3A928095CFC00D13740 /* PartyCreateView.swift */; };
 		18610D4028081AEB00A00657 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610D3F28081AEB00A00657 /* SignInViewModel.swift */; };
 		18610D4228084E7200A00657 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610D4128084E7200A00657 /* FriendsView.swift */; };
 		18610D47280851E700A00657 /* FriendVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610D46280851E700A00657 /* FriendVIewModel.swift */; };
@@ -15,7 +17,6 @@
 		18C1B29628057FBD0058B577 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B29528057FBD0058B577 /* ContentView.swift */; };
 		18C1B29828057FBE0058B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18C1B29728057FBE0058B577 /* Assets.xcassets */; };
 		18C1B29B28057FBE0058B577 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18C1B29A28057FBE0058B577 /* Preview Assets.xcassets */; };
-		18C1B2A22805828D0058B577 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2A12805828D0058B577 /* CreateView.swift */; };
 		18C1B2A5280582F00058B577 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2A4280582F00058B577 /* HomeView.swift */; };
 		18C1B2A72805B3F40058B577 /* LoginViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2A62805B3F40058B577 /* LoginViews.swift */; };
 		18C1B2A92805B4740058B577 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C1B2A82805B4740058B577 /* GoogleService-Info.plist */; };
@@ -35,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1822E3A62809487D00D13740 /* Model + FriendAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model + FriendAddViewModel.swift"; sourceTree = "<group>"; };
+		1822E3A928095CFC00D13740 /* PartyCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyCreateView.swift; sourceTree = "<group>"; };
 		18610D3F28081AEB00A00657 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		18610D4128084E7200A00657 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		18610D46280851E700A00657 /* FriendVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendVIewModel.swift; sourceTree = "<group>"; };
@@ -44,7 +47,6 @@
 		18C1B29528057FBD0058B577 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		18C1B29728057FBE0058B577 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18C1B29A28057FBE0058B577 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		18C1B2A12805828D0058B577 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		18C1B2A4280582F00058B577 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		18C1B2A62805B3F40058B577 /* LoginViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViews.swift; sourceTree = "<group>"; };
 		18C1B2A82805B4740058B577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -74,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1822E3A828095CEA00D13740 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				18C1B2A4280582F00058B577 /* HomeView.swift */,
+				1822E3A928095CFC00D13740 /* PartyCreateView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
 		18610D3E28081ADC00A00657 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +100,7 @@
 				18610D4128084E7200A00657 /* FriendsView.swift */,
 				18610D46280851E700A00657 /* FriendVIewModel.swift */,
 				18610D4828085DFB00A00657 /* FriendAddView.swift */,
+				1822E3A62809487D00D13740 /* Model + FriendAddViewModel.swift */,
 			);
 			path = FriendViews;
 			sourceTree = "<group>";
@@ -134,10 +146,9 @@
 		18C1B2A3280582910058B577 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1822E3A828095CEA00D13740 /* HomeView */,
 				18610D45280851D900A00657 /* FriendViews */,
 				18C1B2B92805B7760058B577 /* AuthViews */,
-				18C1B2A12805828D0058B577 /* CreateView.swift */,
-				18C1B2A4280582F00058B577 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,7 +275,7 @@
 				18C1B29628057FBD0058B577 /* ContentView.swift in Sources */,
 				18EBF0E92807F95E00921803 /* UserPassWordView.swift in Sources */,
 				18C1B2A5280582F00058B577 /* HomeView.swift in Sources */,
-				18C1B2A22805828D0058B577 /* CreateView.swift in Sources */,
+				1822E3A72809487D00D13740 /* Model + FriendAddViewModel.swift in Sources */,
 				18EBF0E72806D40A00921803 /* UserEmailView.swift in Sources */,
 				18610D4928085DFB00A00657 /* FriendAddView.swift in Sources */,
 				18610D4028081AEB00A00657 /* SignInViewModel.swift in Sources */,
@@ -272,6 +283,7 @@
 				18C1B2A72805B3F40058B577 /* LoginViews.swift in Sources */,
 				18C1B2BE2805B9C80058B577 /* Extensions.swift in Sources */,
 				18610D4228084E7200A00657 /* FriendsView.swift in Sources */,
+				1822E3AA28095CFC00D13740 /* PartyCreateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

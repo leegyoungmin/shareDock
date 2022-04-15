@@ -9,8 +9,8 @@ import Foundation
 import Firebase
 
 struct friend:Hashable{
+    var userId:String
     var userName:String
-    var userPhone:String
 }
 
 class FriendViewModel:ObservableObject{
@@ -26,9 +26,12 @@ class FriendViewModel:ObservableObject{
         Firebase.Database.database().reference()
             .child("User")
             .child(userId)
+            .child("friend")
             .observe(.childAdded) { snapshot in
-                guard let values = snapshot.value as? [String:Any] else {return}
+                let userId = snapshot.key
+                guard let name = snapshot.value as? String else{return}
                 
+                self.friends.append(friend(userId: userId, userName: name))
             }
         
     }

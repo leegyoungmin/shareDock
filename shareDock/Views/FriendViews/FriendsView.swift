@@ -19,15 +19,11 @@ struct FriendsView: View {
                     .frame(alignment:.center)
 
             }else{
-                ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(viewModel.friends,id:\.self) { friend in
-                        HStack{
-                            Text(friend.userName)
-                            Spacer()
-                        }
-                        .padding()
-                    }
+                
+                List(viewModel.friends,id:\.self){ friend in
+                    Text(friend.userName)
                 }
+                .listStyle(.plain)
             }
         }
     }
