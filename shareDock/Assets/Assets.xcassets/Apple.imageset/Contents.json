@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "featured-section-appletv-plus_2x.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "featured-section-appletv-plus_2x@2x.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "featured-section-appletv-plus_2x@3x.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
