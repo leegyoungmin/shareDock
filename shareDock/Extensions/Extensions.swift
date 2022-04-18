@@ -8,6 +8,55 @@
 import Foundation
 import SwiftUI
 
+//Colors
+func myColor(_ value:idenColor)->Color{
+    return Color.init(red: value.red/255, green: value.green/255, blue: value.blue/255)
+}
+
+//String
+func currencyString(_ value:NSNumber)->String{
+    let formatter = NumberFormatter()
+    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.numberStyle = .currency
+    formatter.currencySymbol = ""
+    let result = formatter.string(from: value) ?? ""
+    return result + "원"
+}
+
+func paymentDay(_ date:Date)->Int?{
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.dateFormat = "dd"
+    return Int(formatter.string(from: date))
+}
+
+
+//Files
+extension Bundle{
+    func decode<T:Codable>(_ file:String)->T{
+        guard let url = self.url(forResource: file, withExtension: nil) else {
+            fatalError("Failed to locate \(file) in Bundle.")
+        }
+        //2. Create property
+        guard let data = try? Data(contentsOf: url) else{
+            fatalError("Failed to Load \(file) from Bundle.")
+        }
+        //3. Create decoder
+        let decoder = JSONDecoder()
+        
+        //4. deocoded data
+        guard let loaded = try? decoder.decode(T.self, from: data) else{
+            fatalError("Failed to decode \(file) from Bundle.")
+        }
+        //5. return data
+        return loaded
+    }
+}
+
+func convert(_ value:Double)->Double{
+    return value/255
+}
+
 func isValidEmail(testStr:String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -77,6 +126,8 @@ struct extensions_previews:PreviewProvider{
             
             TextField("example", text: $email)
                 .textFieldStyle(signUpTextFieldStyle(title: "이름"))
+            
+            Text(currencyString(NSNumber(value: 200000)))
         }
         .previewLayout(.sizeThatFits)
         .padding()
