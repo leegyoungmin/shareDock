@@ -11,15 +11,20 @@ import SwiftUI
 struct HomeView:View{
     @StateObject var viewModel = HomeViewModel()
     let platforms:[platForm] = Bundle.main.decode("platforms.json")
-    let grid = Array(repeating: GridItem(.flexible()), count: 2)
     @State var isPresent:Bool = false
     var body: some View{
         ZStack{
             
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach(viewModel.parties.sorted(by: {$0.platForm.name<$1.platForm.name}),id:\.self) { party in
-                    HomeCellView(party: party)
-                        .padding()
+                    NavigationLink {
+                        DetailView(party: party)
+                    } label: {
+                        HomeCellView(party: party)
+                            .padding(.horizontal)
+                            .padding(.vertical,5)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             
@@ -57,7 +62,20 @@ struct HomeCellView:View{
         HStack{
             VStack(alignment:.leading,spacing:10){
                 Text(party.platForm.name)
-                Text("\(party.friends.count)명")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                HStack{
+                    Text("총 \(party.friends.count + 1)명")
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                    
+                    Text("\(party.personPrice)원씩")
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                }
+                
+
             }
             
             Spacer()
