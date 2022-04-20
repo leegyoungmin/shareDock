@@ -18,13 +18,12 @@ struct PartyCreateView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: grid,spacing: 20) {
                     
-                    ForEach(viewModel.platForms,id:\.self) { platform in
+                    ForEach(viewModel.platForms.indices,id:\.self) { index in
                         
                         NavigationLink {
-                            PlatformPartyView(sheetPresent: $sheetPresent, platform: platform)
+                            PlatformPartyView(sheetPresent: $sheetPresent, platFormIndex: index)
                         } label: {
-                            PartyCellView(data: platform)
-
+                            PartyCellView(data: platforms[index])
                         }
                     }
                     

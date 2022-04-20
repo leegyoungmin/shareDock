@@ -8,6 +8,20 @@
 import Foundation
 import SwiftUI
 
+//RESOURCE
+let platforms:[platForm] = Bundle.main.decode("platforms.json")
+
+//FIREBASE-HELPER
+extension Encodable{
+    var toDic:[String:Any]?{
+        guard let object = try? JSONEncoder().encode(self) else{return nil}
+        
+        guard let dic = try? JSONSerialization.jsonObject(with: object,options: []) as? [String:Any] else{return nil}
+        
+        return dic
+    }
+}
+
 //Colors
 func myColor(_ value:idenColor)->Color{
     return Color.init(red: value.red/255, green: value.green/255, blue: value.blue/255)

@@ -9,8 +9,11 @@ import SwiftUI
 import iPhoneNumberField
 
 struct FriendAddView: View {
+    //MARK: - PROPERTIES
     @StateObject var viewModel = FriendAddViewModel()
     @Binding var isPresent:Bool
+    
+    //MARK: - VIEW
     var body: some View {
         NavigationView{
             VStack{
@@ -48,7 +51,6 @@ struct FriendAddView: View {
                         Button {
                             DispatchQueue.main.async {
                                 viewModel.addFriend()
-                                viewModel.addRecommend()
                                 self.isPresent = false
                             }
                         } label: {
@@ -80,6 +82,7 @@ struct FriendAddView: View {
     }
 }
 
+//MARK: - PREVIEWS
 struct FriendAddView_Previews: PreviewProvider {
     static var previews: some View {
         FriendAddView(isPresent: .constant(true))

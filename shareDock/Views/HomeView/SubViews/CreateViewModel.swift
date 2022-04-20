@@ -9,96 +9,68 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct party:Codable,Hashable{
-    let platForm:platForm
+struct party:Codable,Hashable,Identifiable{
+    var id = UUID().uuidString
+    let payer:String
+    let members:[String]
+    let platFormIndex:Int
+    let priceName:String
     let price:Int
     let personPrice:Int
-    let friends:[String:String]
-    let date:Int
-    let createDay = Date()
-    
-    enum CodingKeys:String,CodingKey{
-        case platForm
-        case price
-        case personPrice
-        case friends
-        case date
-        case createDay
-    }
+    let payDay:Int
 }
 
 class CreateViewModel:ObservableObject{
     @Published var friends:[Friend] = []
+    var friendIdList:[String] = []
     @Published var selectedFriend:[Friend] = []
     let db = Firestore.firestore()
     
+    
     init(){
-        Friends()
+        fetchFriendIds()
     }
     
-    func Friends(){
+    func fetchFriendIds(){
         guard let userId = Firebase.Auth.auth().currentUser?.uid else{return}
         
-        Firebase.Database.database()
-            .reference()
-            .child("User")
-            .child(userId)
-            .child("friend")
-            .observeSingleEvent(of: .value) { snapshot in
-                for child in snapshot.children{
-                    let childSnap = child as! DataSnapshot
-                    guard let name = childSnap.value as? String else{return}
-                    self.friends.append(Friend(userId: childSnap.key, userName: name, userEmail: "", userPhone: ""))
-                }
-                
-            }
-    }
-    
-    func insertSelectedUser(_ value:Friend){
-        if !self.selectedFriend.contains(value){
-            self.selectedFriend.append(value)
+        db.collection("User").document(userId).getDocument { snapshot, error in
+            guard let snapshot = snapshot,
+                  let friends = snapshot.get("friend") as? [String] else{return}
             
+            self.friendIdList = friends
+            
+            self.fetchFriend()
         }
     }
     
-    func popSelectedUser(_ value:Friend){
-        guard let firstIndex = self.selectedFriend.firstIndex(where: {$0.userName == value.userName}) else{return}
-        
-        self.selectedFriend.remove(at: firstIndex)
-    }
-    
-    func saveData(party:party,completion:@escaping(Bool)->Void){     
-        do{
-            let uuid = UUID().uuidString
-            try db.collection(uuid).document(uuid).setData(from: party)
-            realTimeSetData(uuid, name: party.platForm.name)
-            completion(true)
-        } catch{
-            print("Error in set Data \(error.localizedDescription)")
-            completion(false)
+    func fetchFriend(){
+        friendIdList.forEach { userId in
+            db.collection("User").document(userId).getDocument { snapshot, error in
+                guard let snapshot = snapshot else{return}
+                do{
+                    let user = try snapshot.data(as: Friend.self)
+                    
+                    self.friends.append(user)
+                } catch {
+                    print("Error in user \(error.localizedDescription)")
+                }
+            }
         }
-
     }
     
-    func realTimeSetData(_ uuid:String,name:String){
+    func createParty(party:party){
+        guard let values = party.toDic else{return}
+        db.collection("Party").document(party.id).setData(values) { error in
+            self.updateUserParty(party.id)
+        }
+    }
+    
+    func updateUserParty(_ partyId:String){
         guard let userId = Firebase.Auth.auth().currentUser?.uid else{return}
-        self.selectedFriend.append(Friend(userId: userId, userName: "", userEmail: "", userPhone: ""))
-        self.selectedFriend.forEach{
-            Firebase.Database.database().reference()
-                .child("User")
-                .child($0.userId)
-                .child("Party")
-                .updateChildValues([name:uuid])
+        self.friendIdList.append(userId)
+        self.friendIdList.forEach { userId in
+            db.collection("User").document(userId).updateData(["party":FieldValue.arrayUnion([partyId])])
         }
-    }
-    
-    func memberList()->[String:String]{
-        var data:[String:String] = [:]
-        
-        self.selectedFriend.forEach{
-            data[$0.userId] = $0.userName
-        }
-        
-        return data
     }
 }

@@ -10,24 +10,30 @@ import SwiftUI
 
 struct HomeView:View{
     @StateObject var viewModel = HomeViewModel()
-    let platforms:[platForm] = Bundle.main.decode("platforms.json")
     @State var isPresent:Bool = false
+    @State var selectedParty:party?
+    @State var isLongPress:Bool = false
     var body: some View{
         ZStack{
             
-            ScrollView(.vertical, showsIndicators: false) {
-                ForEach(viewModel.parties.sorted(by: {$0.platForm.name<$1.platForm.name}),id:\.self) { party in
-                    NavigationLink {
-                        DetailView(party: party)
-                    } label: {
-                        HomeCellView(party: party)
-                            .padding(.horizontal)
-                            .padding(.vertical,5)
-                    }
-                    .buttonStyle(.plain)
+            List {
+                ForEach(viewModel.parties) { party in
+                    HomeCellView(party: party)
+                        .listRowSeparator(.hidden)
+                        .onTapGesture {
+                            self.selectedParty = party
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button {
+//                                viewModel.removeData(party.)
+                            } label: {
+                                Image(systemName: "trash.fill")
+                                    .foregroundColor(.red)
+                            }
+                        }
                 }
             }
-            
+            .listStyle(.plain)
             
             VStack{
                 Spacer()
@@ -40,65 +46,62 @@ struct HomeView:View{
                         Image(systemName: "plus.circle")
                             .font(.largeTitle)
                     }
-
+                    
                 }
             }
             .padding()
         }
-        .sheet(isPresented: $isPresent,onDismiss: {
-            viewModel.ObservePartyList {
-                viewModel.ObserveData()
-            }
-        }) {
+        .sheet(isPresented: $isPresent) {
             PartyCreateView(sheetPresent: $isPresent)
         }
-
+        .sheet(item: $selectedParty, content: { party in
+            DetailView(party: party,viewModel: DetailViewModel(userIds: party.members))
+        })
+        
     }
 }
 
 struct HomeCellView:View{
     let party:party
+    let plarform:platForm
+    
+    init(party:party){
+        self.party = party
+        self.plarform = platforms[party.platFormIndex]
+    }
     var body: some View{
         HStack{
             VStack(alignment:.leading,spacing:10){
-                Text(party.platForm.name)
+                
+                Text(plarform.name)
                     .font(.title2)
                     .fontWeight(.bold)
                 
                 HStack{
-                    Text("총 \(party.friends.count + 1)명")
+                    Text("총 \(self.party.members.count)명")
                         .font(.callout)
                         .fontWeight(.semibold)
-                    
+//
                     Text("\(party.personPrice)원씩")
                         .font(.callout)
                         .fontWeight(.semibold)
                 }
                 
-
+                
             }
             
             Spacer()
             
-            Image(party.platForm.image)
+            Image(plarform.image)
                 .resizable()
                 .scaledToFit()
                 .frame(width:100)
         }
         .font(.title3)
-        .foregroundColor(myColor(party.platForm.logoColor))
+        .foregroundColor(myColor(plarform.logoColor))
         .padding()
-        .background(myColor(party.platForm.backgroundColor))
+        .background(myColor(plarform.backgroundColor))
         .cornerRadius(10)
         .shadow(color: .gray.opacity(0.2), radius: 5)
-    }
-}
-
-struct HomeView_Previews:PreviewProvider{
-    static let exampleparty = party(platForm: platForm(name: "디즈니 플러스", image: "Disney", price: ["베이직": 9900], logoColor: shareDock.idenColor(red: 191.0, green: 245.0, blue: 253.0), backgroundColor: shareDock.idenColor(red: 9.0, green: 11.0, blue: 39.0)), price: 9900, personPrice: 4950, friends: ["HGyRnVuejERvgSZeytKvqW16e0v2": "이용수"], date: 20)
-    static var previews: some View{
-        HomeCellView(party: exampleparty)
-            .previewLayout(.sizeThatFits)
-            .padding()
     }
 }

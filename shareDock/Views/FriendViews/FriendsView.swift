@@ -20,8 +20,8 @@ struct FriendsView: View {
 
             }else{
                 
-                List(viewModel.friends,id:\.self){ friend in
-                    Text(friend.userName)
+                List(viewModel.friends,id:\.self){ userName in
+                    Text(userName)
                 }
                 .listStyle(.plain)
             }
