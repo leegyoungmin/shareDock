@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "watch.jpg",
+      "filename" : "watchimage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "watch@2x.jpg",
+      "filename" : "watchimage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "watch@3x.jpg",
+      "filename" : "watchimage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

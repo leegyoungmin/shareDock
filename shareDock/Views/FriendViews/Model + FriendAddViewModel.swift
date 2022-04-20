@@ -8,11 +8,18 @@
 import Foundation
 import Firebase
 
-struct Friend:Hashable{
+struct Friend:Hashable,Codable{
     let userId:String
     let userName:String
     let userEmail:String
     let userPhone:String
+    
+    enum CodingKeys:String, CodingKey{
+        case userId
+        case userName = "name"
+        case userEmail = "email"
+        case userPhone = "phone"
+    }
 }
 
 class FriendAddViewModel:ObservableObject{
@@ -26,67 +33,49 @@ class FriendAddViewModel:ObservableObject{
     }
     
     func findUser(){
-        reference
-            .child("User")
-            .observeSingleEvent(of: .value) { [weak self] snapshot in
-                guard let self = self else{return}
-                for child in snapshot.children{
-                    let childSnapshot = child as! DataSnapshot
-                    
-                    guard let values = childSnapshot.value as? [String:Any],
-                          let phone = values["phone"] as? String else{return}
-                    
-                    if phone == ("0" + self.findPhone){
-                        
-                        guard let name = values["name"] as? String,
-                              let email = values["email"] as? String else{return}
-                        
-                        self.findedUser = Friend(userId: childSnapshot.key, userName: name, userEmail: email, userPhone: phone)
-                        return
-                    }else{
-                        self.findedUser = nil
+        Firestore.firestore().collection("User").getDocuments { snapshot, error in
+            guard let snapshot = snapshot else{return}
+            snapshot.documentChanges.forEach{ change in
+                guard let phoneNumber = change.document.get("phone") as? String else{return}
+                
+                if ("0"+self.findPhone) == phoneNumber{
+                    do{
+                        let user = try change.document.data(as: Friend.self)
+                        self.findedUser = user
+                    } catch {
+                        print("Error in Find User ::: \(error.localizedDescription)")
                     }
+                    
+                    return
                 }
             }
+        }
     }
     
     func findCurrentUser(){
         guard let userId = Firebase.Auth.auth().currentUser?.uid else{return}
         
-        reference
-            .child("User")
-            .child(userId)
-            .observeSingleEvent(of: .value) { [weak self] snapshot in
-                guard let self = self else{return}
-                guard let values = snapshot.value as? [String:Any] else{return}
-                
-                guard let name = values["name"] as? String,
-                      let email = values["email"] as? String,
-                      let phone = values["phone"] as? String else{return}
-                
-                self.currentUser = Friend(userId: userId, userName: name, userEmail: email, userPhone: phone)
-                
+        Firestore.firestore().collection("User")
+            .document(userId)
+            .getDocument(as: Friend.self) { result in
+                switch result{
+                case .success(let friend):
+                    self.currentUser = friend
+                case .failure(let error):
+                    print("Error ::: \(error.localizedDescription)")
+                }
             }
     }
     
     func addFriend(){
         guard let currentUID = Firebase.Auth.auth().currentUser?.uid,
-              let userId = findedUser?.userId,
-              let userName = findedUser?.userName else{return}
+              let userId = findedUser?.userId else{return}
         
-        reference
-            .child("User")
-            .child(currentUID)
-            .child("friend")
-            .updateChildValues([userId:userName])
-    }
-    
-    func addRecommend(){
-        guard let userId = findedUser?.userId else{return}
-        reference
-            .child("User")
-            .child(userId)
-            .child("recommend")
-            .updateChildValues([currentUser.userId:currentUser.userName])
+        let db = Firestore.firestore().collection("User")
+        
+        DispatchQueue.main.async {
+            db.document(currentUID).updateData(["friend":FieldValue.arrayUnion([userId])])
+            db.document(userId).updateData(["recommend":FieldValue.arrayUnion([currentUID])])
+        }
     }
 }

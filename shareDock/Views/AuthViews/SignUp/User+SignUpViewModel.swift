@@ -28,6 +28,7 @@ class SignUpViewModel:ObservableObject{
                 
                 if error == nil{
                     let data:[String:Any] = [
+                        "userId":result!.user.uid,
                         "name":self.userName,
                         "email":self.userEmail,
                         "phone":self.userPhoneNumber
@@ -35,16 +36,18 @@ class SignUpViewModel:ObservableObject{
                     
                     print("Data ::: \(data)")
                     
-                    Database.database().reference()
-                        .child("User")
-                        .child(result!.user.uid)
-                        .setValue(data) { error, _ in
-                            guard let error = error else {
+                    Firestore.firestore()
+                        .collection("User")
+                        .document(result!.user.uid)
+                        .setData(data) { error in
+                            if error == nil{
                                 completions(nil)
-                                return
+                            }else{
+                                completions("예상치 못한 오류가 발생하였습니다.")
                             }
-                            completions(nil)
                         }
+                    
+                    
                 }else{
                     
                     if let errorCode = AuthErrorCode(rawValue: error!._code){

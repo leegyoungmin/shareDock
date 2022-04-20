@@ -14,7 +14,9 @@ struct friend:Hashable{
 }
 
 class FriendViewModel:ObservableObject{
-    @Published var friends:[friend] = []
+    @Published var friends:[String] = []
+    @Published var friendList:[String] = []
+    let db = Firestore.firestore().collection("User")
     
     init(){
         self.fetchData()
@@ -23,16 +25,28 @@ class FriendViewModel:ObservableObject{
     func fetchData(){
         guard let userId = FirebaseAuth.Auth.auth().currentUser?.uid else{return}
         
-        Firebase.Database.database().reference()
-            .child("User")
-            .child(userId)
-            .child("friend")
-            .observe(.childAdded) { snapshot in
-                let userId = snapshot.key
-                guard let name = snapshot.value as? String else{return}
+        db.document(userId).addSnapshotListener { snapshot, error in
+            guard let snapshot = snapshot,
+                  let data = snapshot.data() else{return}
+            
+            if let friends = data["friend"] as? [String]{
+                self.friendList = friends
+                print(self.friendList)
                 
-                self.friends.append(friend(userId: userId, userName: name))
+                self.fetchUserName()
             }
+        }
         
+    }
+    
+    func fetchUserName(){
+        self.friends.removeAll()
+        self.friendList.forEach { userId in
+            db.document(userId).getDocument { snapshot, error in
+                guard let userName = snapshot?.get("name") as? String else {return}
+                
+                self.friends.append(userName)
+            }
+        }
     }
 }

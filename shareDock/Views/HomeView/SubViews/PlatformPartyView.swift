@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct PlatformPartyView: View {
     @Binding var sheetPresent:Bool
-    let platform:platForm
+    let platFormIndex:Int
     @State var selectedKey:String = ""
     @State var selectedUserCount:Int = 1
     @State var selectedDate = Date()
@@ -46,7 +47,8 @@ struct PlatformPartyView: View {
                 Spacer()
                 
                 Picker("", selection: $selectedKey) {
-                    ForEach(platform.price.sorted(by: <),id:\.key) { key,value in
+                    
+                    ForEach(platforms[platFormIndex].price.sorted(by: <),id:\.key){ key,value in
                         Text("\(key)")
                             .fontWeight(.semibold)
                             .onTapGesture {
@@ -124,7 +126,7 @@ struct PlatformPartyView: View {
             HStack(alignment:.center){
                 VStack(alignment:.leading,spacing:5){
                     HStack(alignment:.center){
-                        Text(currencyString(NSNumber(value: platform.price[selectedKey] ?? 0)))
+                        Text(currencyString(NSNumber(value: platforms[platFormIndex].price[selectedKey] ?? 0)))
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.indigo)
@@ -134,26 +136,27 @@ struct PlatformPartyView: View {
                             .fontWeight(.semibold)
                     }
                     
-                    Text("1인당 금액 : \(currencyString(personRate(platform.price[selectedKey] ?? 0)))")
+                    Text("1인당 금액 : \(currencyString(personRate(platforms[platFormIndex].price[selectedKey] ?? 0)))")
                 }
-                
                 
                 Spacer()
                 
                 Button {
+                    guard let userId = Firebase.Auth.auth().currentUser?.uid else{return}
+                    var members = viewModel.friendIdList
+                    members.append(userId)
                     
-                    let party = party(platForm:platform,
-                                      price: platform.price[selectedKey] ?? 0,
-                                      personPrice: Int(truncating: personRate(platform.price[selectedKey] ?? 0)),
-                                      friends: viewModel.memberList(),
-                                      date: paymentDay(selectedDate) ?? 0)
-                    viewModel.saveData(party: party) { isSuccess in
-                        if isSuccess{
-                            self.sheetPresent = false
-                        }else{
-                            print("Error in Create Data")
-                        }
-                    }
+                    let party = party(payer: userId,
+                                      members: members,
+                                      platFormIndex: platFormIndex,
+                                      priceName: selectedKey,
+                                      price: platforms[platFormIndex].price[selectedKey] ?? 0,
+                                      personPrice: Int(truncating: personRate(platforms[platFormIndex].price[selectedKey] ?? 0)),
+                                      payDay: paymentDay(selectedDate) ?? 0)
+                    
+                    
+                    viewModel.createParty(party: party)
+                    print(party)
                 } label: {
                     HStack{
                         Text("완료")
@@ -171,7 +174,6 @@ struct PlatformPartyView: View {
             
             
         }
-        .navigationTitle(platform.name)
     }
 }
 
@@ -189,10 +191,8 @@ struct memberCellView:View{
                 
                 if isSelctedCell{
                     selectedCount -= 1
-                    self.viewModel.popSelectedUser(friend)
                 }else{
                     selectedCount += 1
-                    self.viewModel.insertSelectedUser(friend)
                 }
                 
                 isSelctedCell.toggle()
@@ -208,6 +208,6 @@ struct memberCellView:View{
 struct PlatformPartyView_Previews: PreviewProvider {
     @State static var platforms:[platForm] = Bundle.main.decode("platforms.json")
     static var previews: some View {
-        PlatformPartyView(sheetPresent: .constant(true), platform: platforms[0])
+        PlatformPartyView(sheetPresent: .constant(true), platFormIndex: 0)
     }
 }
