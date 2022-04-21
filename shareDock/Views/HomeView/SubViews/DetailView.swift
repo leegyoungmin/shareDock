@@ -51,8 +51,6 @@ struct DetailView: View {
 
                             Spacer()
                         }
-
-
                     }
 
                 }
@@ -60,20 +58,33 @@ struct DetailView: View {
 
 
                 VStack(alignment:.leading){
+                    
+                    GroupBox {
+                        VStack{
+                            HStack{
+                                Text("금액")
+                                    .fontWeight(.semibold)
+                                Spacer()
+                                Text("\(currencyString(NSNumber(value: party.price)))")
+                                    
+                            }
 
-                    Group {
-
-                        //PRICENAME & PRICE
-                        HStack{
-                            Text(party.priceName)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-
-                            Text("\(currencyString(NSNumber(value: party.price)))")
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                            
+                            HStack{
+                                Text("다음 결제일")
+                                    .fontWeight(.semibold)
+                                Spacer()
+                                Text(dateComponent(day:party.payDay))
+                                    
+                            }
                         }
-
+                    } label: {
+                        Text(party.priceName)
+                            .font(.title)
+                            .fontWeight(.bold)
+                    }
+                    
+                    VStack {
                         //PERSONPRICE
                         HStack{
                             Text("\(currencyString(NSNumber(value: party.personPrice)))")
@@ -85,10 +96,9 @@ struct DetailView: View {
                                 .font(.title)
                                 .fontWeight(.heavy)
                         }
-                        .padding(.top,10)
                     }
-                    .controlGroupStyle(.navigation)
-
+                    .padding(.vertical)
+                    
                     Divider()
 
                     HStack(alignment:.bottom){

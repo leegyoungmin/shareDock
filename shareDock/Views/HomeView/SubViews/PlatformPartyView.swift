@@ -170,9 +170,7 @@ struct PlatformPartyView: View {
             }
             .padding()
             .background(.gray.opacity(0.1))
- 
-            
-            
+            .navigationTitle(platforms[platFormIndex].name)
         }
     }
 }

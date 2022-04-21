@@ -36,6 +36,7 @@
 		18C1B2BE2805B9C80058B577 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2BD2805B9C80058B577 /* Extensions.swift */; };
 		18C1B2C12805BEB60058B577 /* User+SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1B2C02805BEB60058B577 /* User+SignUpViewModel.swift */; };
 		18C20B44280F08D40063F154 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C20B43280F08D40063F154 /* DetailView.swift */; };
+		18CF2CB3281140E8000386C3 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 18CF2CB2281140E8000386C3 /* PopupView */; };
 		18D5FA6B28105FF600D59032 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5FA6A28105FF600D59032 /* DetailViewModel.swift */; };
 		18EBF0E32806C02000921803 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 18EBF0E22806C02000921803 /* iPhoneNumberField */; };
 		18EBF0E52806D1BE00921803 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBF0E42806D1BE00921803 /* UserNameView.swift */; };
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CF2CB3281140E8000386C3 /* PopupView in Frameworks */,
 				18C1B2AE2805B5870058B577 /* FirebaseAnalytics in Frameworks */,
 				18EBF0E32806C02000921803 /* iPhoneNumberField in Frameworks */,
 				18C1B2B22805B5870058B577 /* FirebaseAuth in Frameworks */,
@@ -246,6 +248,7 @@
 				18C1B2B52805B5870058B577 /* FirebaseFirestore */,
 				18C1B2B72805B5870058B577 /* FirebaseFirestoreSwift-Beta */,
 				18EBF0E22806C02000921803 /* iPhoneNumberField */,
+				18CF2CB2281140E8000386C3 /* PopupView */,
 			);
 			productName = shareDock;
 			productReference = 18C1B29028057FBD0058B577 /* shareDock.app */;
@@ -280,6 +283,7 @@
 				18C1B2AB2805B4E80058B577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				18C1B2AC2805B5870058B577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				18EBF0E12806C02000921803 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
+				18CF2CB1281140E8000386C3 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 18C1B29128057FBD0058B577 /* Products */;
 			projectDirPath = "";
@@ -550,6 +554,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		18CF2CB1281140E8000386C3 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		18EBF0E12806C02000921803 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
@@ -590,6 +602,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 18C1B2AB2805B4E80058B577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseFirestoreSwift-Beta";
+		};
+		18CF2CB2281140E8000386C3 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18CF2CB1281140E8000386C3 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 		18EBF0E22806C02000921803 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;

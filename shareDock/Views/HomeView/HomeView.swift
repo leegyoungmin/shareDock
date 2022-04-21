@@ -13,6 +13,7 @@ struct HomeView:View{
     @State var isPresent:Bool = false
     @State var selectedParty:party?
     @State var isLongPress:Bool = false
+    
     var body: some View{
         ZStack{
             
@@ -69,6 +70,7 @@ struct HomeCellView:View{
         self.party = party
         self.plarform = platforms[party.platFormIndex]
     }
+    
     var body: some View{
         HStack{
             VStack(alignment:.leading,spacing:10){
@@ -76,6 +78,10 @@ struct HomeCellView:View{
                 Text(plarform.name)
                     .font(.title2)
                     .fontWeight(.bold)
+                
+                Text(dateComponent(day:party.payDay) + " 결제 예정")
+                    .font(.footnote)
+                    .fontWeight(.semibold)
                 
                 HStack{
                     Text("총 \(self.party.members.count)명")

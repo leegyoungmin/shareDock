@@ -19,17 +19,39 @@ class SignInViewModel:ObservableObject{
         self.isLogged = (FirebaseAuth.Auth.auth().currentUser != nil)
     }
     
-    func signIn(){
-        Auth.auth().signIn(withEmail: userEmail, password: userPassWord) { result, error in
+    func signIn(completion:@escaping(Error)->Void){
+        Auth.auth().signIn(withEmail: userEmail, password: userPassWord) {[weak self] result, error in
+            guard let self = self else{return}
             if error == nil{
                 withAnimation {
                     self.isLogged = true
                 }
 
             }else{
-                print("Error ::: \(error?.localizedDescription)")
-                self.isLogged = false
+                completion(error!)
             }
+        }
+    }
+    
+    func throwErrors(error:Error) throws{
+        guard let error = error as? NSError,
+              let errorCode = FirebaseAuth.AuthErrorCode(rawValue: error.code) else{return}
+        
+        
+        switch errorCode{
+        case .userNotFound:
+            throw SignInError.notExistUser
+        case .invalidEmail:
+            throw SignInError.wrongEmail
+        case .wrongPassword:
+            
+            if self.userPassWord.isEmpty{
+                throw SignInError.emptyPwd
+            }else{
+                throw SignInError.wrongPwd
+            }
+            
+        default: print(error.code)
         }
     }
 }

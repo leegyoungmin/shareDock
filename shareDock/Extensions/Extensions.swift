@@ -7,6 +7,30 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
+
+//String
+
+//ERRORS
+enum SignInError:LocalizedError{
+    case notExistUser
+    case wrongEmail
+    case wrongPwd
+    case emptyPwd
+    
+    var errorDescription: String?{
+        switch self {
+        case .notExistUser:
+            return "해당 이메일로 가입된 사용자가 없습니다."
+        case .wrongEmail:
+            return "잘못된 이메일 형식입니다."
+        case .wrongPwd:
+            return "틀린 비밀번호입니다."
+        case .emptyPwd:
+            return "비밀번호를 입력해주세요."
+        }
+    }
+}
 
 //RESOURCE
 let platforms:[platForm] = Bundle.main.decode("platforms.json")
@@ -44,6 +68,19 @@ func paymentDay(_ date:Date)->Int?{
     return Int(formatter.string(from: date))
 }
 
+func dateComponent(day:Int) -> String{
+    let calendar = Calendar.current
+    let currentDate = Date()
+    let currentComponent = calendar.dateComponents([.month], from: currentDate)
+    let component = DateComponents(month: currentComponent.month ?? 0 + 1,day: day)
+    
+    let returnDate = calendar.date(from: component) ?? currentDate
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.dateFormat = "M월 d일"
+    return dateFormatter.string(from: returnDate)
+}
 
 //Files
 extension Bundle{

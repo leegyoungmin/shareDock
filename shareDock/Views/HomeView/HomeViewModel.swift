@@ -33,14 +33,17 @@ class HomeViewModel:ObservableObject{
     
     func fetchParty(){
         self.partyIdList.forEach { partyId in
-            db.collection("Party").document(partyId).addSnapshotListener { snapshot, error in
-                guard let snapshot = snapshot else{return}
-                
-                do{
-                    let party = try snapshot.data(as: party.self)
-                    self.parties.append(party)
-                } catch {
-                    print("Error in fetch Party ::: \(error.localizedDescription)")
+            
+            if !parties.contains(where: {$0.id == partyId}){
+                db.collection("Party").document(partyId).addSnapshotListener { snapshot, error in
+                    guard let snapshot = snapshot else{return}
+                    
+                    do{
+                        let party = try snapshot.data(as: party.self)
+                        self.parties.append(party)
+                    } catch {
+                        print("Error in fetch Party ::: \(error.localizedDescription)")
+                    }
                 }
             }
         }
