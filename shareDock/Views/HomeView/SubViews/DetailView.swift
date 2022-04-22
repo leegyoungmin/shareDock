@@ -57,47 +57,41 @@ struct DetailView: View {
 
 
 
-                VStack(alignment:.leading){
+                VStack(alignment:.leading,spacing: 20){
                     
-                    GroupBox {
-                        VStack{
-                            HStack{
-                                Text("금액")
-                                    .fontWeight(.semibold)
-                                Spacer()
-                                Text("\(currencyString(NSNumber(value: party.price)))")
-                                    
-                            }
-
-                            
-                            HStack{
-                                Text("다음 결제일")
-                                    .fontWeight(.semibold)
-                                Spacer()
-                                Text(dateComponent(day:party.payDay))
-                                    
-                            }
-                        }
-                    } label: {
-                        Text(party.priceName)
-                            .font(.title)
-                            .fontWeight(.bold)
-                    }
                     
-                    VStack {
-                        //PERSONPRICE
+                    VStack (spacing:5){
                         HStack{
-                            Text("\(currencyString(NSNumber(value: party.personPrice)))")
-                                .font(.system(size: 40))
-                                .fontWeight(.black)
-                                .foregroundColor(.indigo)
-
-                            Text("× \(party.members.count)명")
+                            Text("\(party.priceName)")
                                 .font(.title)
-                                .fontWeight(.heavy)
+                                .fontWeight(.bold)
+                            
+                            Spacer()
+                            
+                            Text("\(currencyString(NSNumber(value: party.personPrice)))")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(.accentColor)
+                        }
+                        
+                        HStack {
+                            Text(dateComponent(day:party.payDay))
+                                .foregroundColor(.gray)
+                                .font(.footnote)
+                                .padding(5)
+                                .cornerRadius(5)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke()
+                                        .foregroundColor(.gray)
+                                )
+                            
+                            Spacer()
+                            
+                            Text("\(currencyString(NSNumber(value: party.price)))/\(party.members.count)명")
+                                .foregroundColor(.gray)
                         }
                     }
-                    .padding(.vertical)
                     
                     Divider()
 
@@ -111,12 +105,11 @@ struct DetailView: View {
 
                     LazyVGrid(columns: grid, alignment: .leading, spacing: 10) {
                         
-                        ForEach(viewModel.userNameList.sorted(by: <),id:\.self){ name in
-                            HStack{
-                                Text(name)
-                                Spacer()
-                            }
-                            .padding()
+                        
+                        ForEach(viewModel.userNameList.sorted(by: {$0.userName < $1.userName}),id:\.self){ user in
+                            friendCellView(user: user)
+                                .padding(.horizontal)
+                                .padding(.vertical,10)
                         }
                     }
 
@@ -130,10 +123,24 @@ struct DetailView: View {
     }
 }
 
-//struct DetailView_Previews: PreviewProvider {
-//    static let exampleparty = party(platForm: shareDock.platForm(name: "티빙", image: "Tving", price: ["프리미엄": 13900, "베이직": 7900, "스탠다드": 10900], logoColor: shareDock.idenColor(red: 255.0, green: 255.0, blue: 255.0), backgroundColor: shareDock.idenColor(red: 255.0, green: 21.0, blue: 60.0)),priceName: "프리미엄" ,price: 9900, personPrice: 4950, friends: ["HGyRnVuejERvgSZeytKvqW16e0v2": "이용수"], date: 20)
-//    static var previews: some View {
-//
-//        DetailView(party: exampleparty)
-//    }
-//}
+struct friendCellView:View{
+    let user:partyUser
+    var body: some View{
+        HStack{
+            Text(user.userName)
+            
+            Spacer()
+            
+            if user.payUser{
+                Image(systemName: "creditcard.fill")
+            }
+        }
+    }
+}
+
+struct DetailView_Previews: PreviewProvider {
+    static let exampleparty = party(payer: "이경민", members: ["ㅁㄴㅇ","asjdn"], platFormIndex: 1, priceName: "베이직", price: 9900, personPrice: 3300, payDay: 15)
+    static var previews: some View {
+        DetailView(party: exampleparty, viewModel: DetailViewModel(party: exampleparty))
+    }
+}

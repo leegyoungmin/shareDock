@@ -9,27 +9,38 @@ import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
 
+struct partyUser:Codable,Hashable{
+    let userId:String
+    let userName:String
+    var payUser:Bool = false
+}
+
 class DetailViewModel:ObservableObject{
-    @Published var userNameList:[String] = []
-    let userIds:[String]
-    let db = Firestore.firestore().collection("User")
-    init(userIds:[String]){
-        self.userIds = userIds
+    @Published var userNameList:[partyUser] = []
+    let party:party
+    let db = Firestore.firestore()
+
+    init(party:party){
+        self.party = party
         
-        fetchUserNames()
+        self.fetchData()
     }
     
-    
-    func fetchUserNames(){
-        self.userIds.forEach { userId in
-            db.document(userId).getDocument { snapshot, error in
-                guard let snapshot = snapshot,
-                      let userName = snapshot.get("name") as? String else{return}
+    func fetchData(){
+        
+        self.party.members.forEach { userId in
+            db.collection("User").document(userId).getDocument { [weak self] snapshot, error in
+                guard let self = self else{return}
+                guard let userName = snapshot?.get("name") as? String else{return}
                 
-                self.userNameList.append(userName)
-                
+                if userId == self.party.payer{
+                    self.userNameList.append(partyUser(userId: userId, userName: userName,payUser: true))
+                }else{
+                    self.userNameList.append(partyUser(userId: userId, userName: userName))
+                }
             }
         }
+        
 
     }
 }

@@ -72,7 +72,7 @@ func dateComponent(day:Int) -> String{
     let calendar = Calendar.current
     let currentDate = Date()
     let currentComponent = calendar.dateComponents([.month], from: currentDate)
-    let component = DateComponents(month: currentComponent.month ?? 0 + 1,day: day)
+    let component = DateComponents(month: (currentComponent.month ?? 0) + 1,day: day)
     
     let returnDate = calendar.date(from: component) ?? currentDate
     
@@ -179,6 +179,8 @@ struct extensions_previews:PreviewProvider{
                 .textFieldStyle(signUpTextFieldStyle(title: "이름"))
             
             Text(currencyString(NSNumber(value: 200000)))
+            
+            Text(dateComponent(day:14))
         }
         .previewLayout(.sizeThatFits)
         .padding()

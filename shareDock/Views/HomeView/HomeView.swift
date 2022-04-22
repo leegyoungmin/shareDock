@@ -17,24 +17,35 @@ struct HomeView:View{
     var body: some View{
         ZStack{
             
-            List {
-                ForEach(viewModel.parties) { party in
-                    HomeCellView(party: party)
-                        .listRowSeparator(.hidden)
-                        .onTapGesture {
-                            self.selectedParty = party
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button {
-//                                viewModel.removeData(party.)
-                            } label: {
-                                Image(systemName: "trash.fill")
-                                    .foregroundColor(.red)
-                            }
-                        }
+            if viewModel.parties.isEmpty{
+                VStack{
+                    Spacer()
+                    Text("아직 추가된 파티가 없습니다.")
+                    Spacer()
                 }
+            }else{
+                List {
+                    ForEach(viewModel.parties) { party in
+                        HomeCellView(party: party)
+                            .listRowSeparator(.hidden)
+                            .onTapGesture {
+                                self.selectedParty = party
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                
+                                Button(role: .destructive) {
+                                    viewModel.removeData(uuid: party.id)
+
+                                } label: {
+                                    Image(systemName: "trash.fill")
+                                }
+                            }
+                    }
+                }
+                .listStyle(.plain)
             }
-            .listStyle(.plain)
+            
+            
             
             VStack{
                 Spacer()
@@ -56,7 +67,7 @@ struct HomeView:View{
             PartyCreateView(sheetPresent: $isPresent)
         }
         .sheet(item: $selectedParty, content: { party in
-            DetailView(party: party,viewModel: DetailViewModel(userIds: party.members))
+            DetailView(party: party,viewModel: DetailViewModel(party: party))
         })
         
     }
