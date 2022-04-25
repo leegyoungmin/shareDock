@@ -146,7 +146,8 @@ struct PlatformPartyView: View {
                     var members = viewModel.friendIdList
                     members.append(userId)
                     
-                    let party = party(payer: userId,
+                    let party = party(name: nil,
+                                      payer: userId,
                                       members: members,
                                       platFormIndex: platFormIndex,
                                       priceName: selectedKey,

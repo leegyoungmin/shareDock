@@ -26,23 +26,44 @@ struct HomeView:View{
             }else{
                 List {
                     ForEach(viewModel.parties) { party in
-                        HomeCellView(party: party)
-                            .listRowSeparator(.hidden)
-                            .onTapGesture {
-                                self.selectedParty = party
-                            }
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                
-                                Button(role: .destructive) {
-                                    viewModel.removeData(uuid: party.id)
-
-                                } label: {
-                                    Image(systemName: "trash.fill")
+                        
+                        if party.name == nil{
+                            HomeCellView(party: party)
+                                .listRowSeparator(.hidden)
+                                .onTapGesture {
+                                    self.selectedParty = party
                                 }
-                            }
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    
+                                    Button(role: .destructive) {
+                                        viewModel.removeData(uuid: party.id)
+                                        
+                                    } label: {
+                                        Image(systemName: "trash.fill")
+                                    }
+                                }
+                        }else{
+                            customCellView(party: party)
+                                .listRowSeparator(.hidden)
+                                .onTapGesture {
+                                    self.selectedParty = party
+                                }
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    
+                                    Button(role: .destructive) {
+                                        viewModel.removeData(uuid: party.id)
+                                        
+                                    } label: {
+                                        Image(systemName: "trash.fill")
+                                    }
+                                }
+                        }
                     }
                 }
                 .listStyle(.plain)
+                .onAppear {
+                    print(viewModel.parties)
+                }
             }
             
             
@@ -73,6 +94,44 @@ struct HomeView:View{
     }
 }
 
+struct customCellView:View{
+    let party:party
+    var body: some View{
+        HStack{
+            VStack(alignment:.leading,spacing:10){
+                
+                Text(party.name!)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                Text(dateComponent(day:party.payDay) + " 결제 예정")
+                    .font(.footnote)
+                    .fontWeight(.semibold)
+                
+                HStack{
+                    Text("총 \(self.party.members.count)명")
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                    //
+                    Text("\(party.personPrice)원씩")
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                }
+                
+                
+            }
+            
+            Spacer()
+        }
+        .font(.title3)
+        .foregroundColor(.indigo)
+        .padding()
+        .background(Color.init(uiColor: UIColor.secondarySystemBackground))
+        .cornerRadius(10)
+        .shadow(color: .gray.opacity(0.2), radius: 2)
+    }
+}
+
 struct HomeCellView:View{
     let party:party
     let plarform:platForm
@@ -98,7 +157,7 @@ struct HomeCellView:View{
                     Text("총 \(self.party.members.count)명")
                         .font(.callout)
                         .fontWeight(.semibold)
-//
+                    
                     Text("\(party.personPrice)원씩")
                         .font(.callout)
                         .fontWeight(.semibold)

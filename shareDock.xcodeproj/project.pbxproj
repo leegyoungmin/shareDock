@@ -57,7 +57,7 @@
 		18610D4128084E7200A00657 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		18610D46280851E700A00657 /* FriendVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendVIewModel.swift; sourceTree = "<group>"; };
 		18610D4828085DFB00A00657 /* FriendAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddView.swift; sourceTree = "<group>"; };
-		18C1B29028057FBD0058B577 /* shareDock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shareDock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18C1B29028057FBD0058B577 /* 구독가치.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "구독가치.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C1B29328057FBD0058B577 /* shareDockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shareDockApp.swift; sourceTree = "<group>"; };
 		18C1B29528057FBD0058B577 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		18C1B29728057FBE0058B577 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		18C1B29128057FBD0058B577 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18C1B29028057FBD0058B577 /* shareDock.app */,
+				18C1B29028057FBD0058B577 /* 구독가치.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 				18CF2CB2281140E8000386C3 /* PopupView */,
 			);
 			productName = shareDock;
-			productReference = 18C1B29028057FBD0058B577 /* shareDock.app */;
+			productReference = 18C1B29028057FBD0058B577 /* 구독가치.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -392,7 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -446,7 +446,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -461,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"shareDock/Preview Content\"";
@@ -478,7 +479,8 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = shareDock.shareDock;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "구독가치";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"shareDock/Preview Content\"";
@@ -507,7 +510,8 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = shareDock.shareDock;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "구독가치";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

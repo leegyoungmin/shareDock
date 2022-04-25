@@ -72,6 +72,7 @@ struct LoginView:View{
         .padding()
         .fullScreenCover(isPresented: $isPresentSignUp) {
             UserPhoneView(isPresent: $isPresentSignUp)
+                
         }
         .popup(isPresented: $isShowError,autohideIn: 1) {
             ErrorAlertView(message: self.errorMessage)

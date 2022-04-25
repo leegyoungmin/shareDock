@@ -52,11 +52,17 @@ func myColor(_ value:idenColor)->Color{
 }
 
 //String
-func currencyString(_ value:NSNumber)->String{
+
+let currencyFormatter:NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.locale = Locale(identifier: "ko_KR")
     formatter.numberStyle = .currency
     formatter.currencySymbol = ""
+    return formatter
+}()
+
+func currencyString(_ value:NSNumber)->String{
+    let formatter = currencyFormatter
     let result = formatter.string(from: value) ?? ""
     return result + "원"
 }
@@ -163,6 +169,32 @@ struct signUpTextFieldStyle:TextFieldStyle{
     }
 }
 
+struct inputTextFieldStyle:TextFieldStyle{
+    let title:String
+    let unit:String
+    func _body(configuration:TextField<Self._Label>)->some View{
+        HStack(alignment:.center){
+            Text(title)
+                .font(.title3)
+                .fontWeight(.semibold)
+            
+            Spacer()
+            
+            configuration
+                .multilineTextAlignment(.center)
+                .frame(maxWidth:100)
+                .padding(.horizontal)
+                .padding(.vertical,8)
+                .background(Color.init(uiColor: UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+            
+            Text(unit)
+                .font(.footnote)
+                
+        }
+    }
+}
+
 struct extensions_previews:PreviewProvider{
     @State static var email:String = ""
     static var previews: some View{
@@ -175,8 +207,8 @@ struct extensions_previews:PreviewProvider{
             }
             .buttonStyle(roundedButtonStyle(textColor: .white,color: .indigo))
             
-            TextField("example", text: $email)
-                .textFieldStyle(signUpTextFieldStyle(title: "이름"))
+            TextField("", text: $email)
+                .textFieldStyle(inputTextFieldStyle(title: "요금제",unit:"원"))
             
             Text(currencyString(NSNumber(value: 200000)))
             

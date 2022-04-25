@@ -16,7 +16,12 @@ struct DetailView: View {
     
     init(party:party,viewModel:DetailViewModel){
         self.party = party
-        self.platForm = platforms[party.platFormIndex]
+        
+        if party.name == nil{
+            self.platForm = platforms[party.platFormIndex]
+        }else{
+            self.platForm = platforms[0]
+        }
         _viewModel = StateObject.init(wrappedValue: viewModel)
     }
 
@@ -27,14 +32,26 @@ struct DetailView: View {
                 ZStack{
                     HStack{
                         Spacer()
-                        Image(platForm.image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 150, alignment: .center)
+                        
+                        if party.name == nil{
+                            Image(platForm.image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 150, alignment: .center)
+                        }else{
+                            Text(party.name!)
+                                .font(.system(size: 80))
+                                .foregroundColor(.white)
+                                .tracking(50)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                        }
+                        
+
                         Spacer()
                     }
                     .frame(height:250)
-                    .background(myColor(platForm.backgroundColor))
+                    .background( party.name == nil ? myColor(platForm.backgroundColor):.accentColor)
 
                     HStack{
                         Spacer()
@@ -44,7 +61,7 @@ struct DetailView: View {
                                 self.dismiss.callAsFunction()
                             } label: {
                                 Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.white.opacity(0.5))
+                                    .foregroundColor(Color.init(uiColor: UIColor.secondaryLabel))
                                     .font(.title2)
                             }
                             .padding()
@@ -139,7 +156,7 @@ struct friendCellView:View{
 }
 
 struct DetailView_Previews: PreviewProvider {
-    static let exampleparty = party(payer: "이경민", members: ["ㅁㄴㅇ","asjdn"], platFormIndex: 1, priceName: "베이직", price: 9900, personPrice: 3300, payDay: 15)
+    static let exampleparty = party(name:nil,payer: "이경민", members: ["ㅁㄴㅇ","asjdn"], platFormIndex: 1, priceName: "베이직", price: 9900, personPrice: 3300, payDay: 15)
     static var previews: some View {
         DetailView(party: exampleparty, viewModel: DetailViewModel(party: exampleparty))
     }

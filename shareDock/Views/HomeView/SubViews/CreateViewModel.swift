@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 
 struct party:Codable,Hashable,Identifiable{
     var id = UUID().uuidString
+    let name:String?
     let payer:String
     let members:[String]
     let platFormIndex:Int

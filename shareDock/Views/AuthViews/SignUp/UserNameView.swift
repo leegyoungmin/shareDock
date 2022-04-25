@@ -51,6 +51,16 @@ struct UserNameView: View {
         }
         .navigationBarTitleDisplayMode(.large)
         .padding()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    self.isPresent = false
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                }
+
+            }
+        }
     }
 }
 

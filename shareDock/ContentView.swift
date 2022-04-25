@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    @StateObject var LoginViewModel = SignInViewModel()
+    @EnvironmentObject var LoginViewModel:SignInViewModel
     @State var selection:Int = 0
     @State var isPresentPlus:Bool = false
     
@@ -26,64 +26,57 @@ struct ContentView: View {
     
     
     var body: some View {
-        if LoginViewModel.isLogged{
-            NavigationView {
-                TabView(selection: $selection) {
-                    HomeView()
-                        .tag(0)
-                        .tabItem {
-                            Label("홈", systemImage: "house")
-                        }
+        NavigationView {
+            TabView(selection: $selection) {
+                HomeView()
+                    .tag(0)
+                    .tabItem {
+                        Label("홈", systemImage: "house")
+                    }
+                
+                FriendsView()
+                    .tag(1)
+                    .tabItem {
+                        Label("친구 목록", systemImage: "person.2")
+                    }
+
+            }
+            .navigationTitle(convertTitle())
+            .fullScreenCover(isPresented: $isPresentPlus, content: {
+                FriendAddView(isPresent: $isPresentPlus)
+            })
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     
-                    FriendsView()
-                        .tag(1)
-                        .tabItem {
-                            Label("친구 목록", systemImage: "person.2")
-                        }
-
-                }
-                .navigationTitle(convertTitle())
-                .fullScreenCover(isPresented: $isPresentPlus, content: {
-                    FriendAddView(isPresent: $isPresentPlus)
-                })
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        
-                        Menu {
-                            Button {
-                                do{
-                                    try Firebase.Auth.auth().signOut()
-                                    self.LoginViewModel.userEmail = ""
-                                    self.LoginViewModel.userPassWord = ""
-                                    self.LoginViewModel.isLogged = false
-                                } catch{
-                                    print(error.localizedDescription)
-                                }
-
-                            } label: {
-                                Text("로그 아웃")
+                    Menu {
+                        Button {
+                            do{
+                                try Firebase.Auth.auth().signOut()
+                                self.LoginViewModel.userEmail = ""
+                                self.LoginViewModel.userPassWord = ""
+                                self.LoginViewModel.isLogged = false
+                            } catch{
+                                print(error.localizedDescription)
                             }
-                            
-                            Button {
-                                self.isPresentPlus = true
-                            } label: {
-                                Text("친구 추가")
-                            }
-
 
                         } label: {
-                            Image(systemName: "ellipsis")
-                                .rotationEffect(Angle(degrees: 90))
+                            Text("로그 아웃")
                         }
+                        
+                        Button {
+                            self.isPresentPlus = true
+                        } label: {
+                            Text("친구 추가")
+                        }
+
+
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .rotationEffect(Angle(degrees: 90))
                     }
                 }
             }
-        }else{
-            LoginView()
-                .environmentObject(self.LoginViewModel)
         }
-        
-        
         
     }
 }
